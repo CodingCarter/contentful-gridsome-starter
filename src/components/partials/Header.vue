@@ -177,7 +177,7 @@ header {
             }
 
             .results {
-                // transition: opacity 300ms;
+                transition: opacity 300ms;
                 width: 100%;
                 position: absolute;
                 top: 5rem;
@@ -187,7 +187,7 @@ header {
                 display: grid;
                 flex-direction: column;
                 grid-template-rows: auto;
-                // opacity: 0;
+                opacity: 0;
                 // pointer-events: none;
                 border-radius: .2rem;
                 z-index: 100;
