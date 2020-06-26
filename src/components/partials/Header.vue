@@ -10,6 +10,7 @@
                 <input
                     v-model="searchTerm"
                     class="input"
+                    id="search"
                     type="text"
                     placeholder="Search for posts..."
                 >
@@ -43,22 +44,22 @@ export default {
     computed: {
         searchResults () {
             var searchTerm = this.searchTerm
-            var resultsEl = document.querySelector('#results');
+            // var resultsEl = document ? document.querySelector('#results') : undefined;
             var resultsElTransition = '300ms ease opacity';
 
             if (searchTerm.length < 3) {
-                if (resultsEl) {
-                    resultsEl.style.transition = 'none';
-                    resultsEl.style.opacity = 0;
-                    resultsEl.style.pointerEvents = 'none';
-                }
+                // if (resultsEl) {
+                //     resultsEl.style.transition = 'none';
+                //     resultsEl.style.opacity = 0;
+                //     resultsEl.style.pointerEvents = 'none';
+                // }
                 return []
             } else {
-                if (resultsEl && this.$search.search({ query: searchTerm, limit: 5 }).length > 0) {
-                    resultsEl.style.transition = resultsElTransition;
-                    resultsEl.style.opacity = 1;
-                    resultsEl.style.pointerEvents = 'all';
-                }
+                // if (resultsEl && this.$search.search({ query: searchTerm, limit: 5 }).length > 0) {
+                //     resultsEl.style.transition = resultsElTransition;
+                //     resultsEl.style.opacity = 1;
+                //     resultsEl.style.pointerEvents = 'all';
+                // }
 
                 return this.$search.search({ query: searchTerm, limit: 5 })
             }
@@ -74,6 +75,13 @@ export default {
                 }, 1);
             }
         };
+        document.querySelector('input#search').addEventListener('input', function() {
+            if (this.value.length <= 3) {
+                document.querySelector('.results').style.opacity = 0;
+            } else {
+                document.querySelector('.results').style.opacity = 1;
+            }
+        });
     }
 }
 </script>
@@ -169,7 +177,7 @@ header {
             }
 
             .results {
-                transition: opacity 300ms;
+                // transition: opacity 300ms;
                 width: 100%;
                 position: absolute;
                 top: 5rem;
@@ -179,8 +187,8 @@ header {
                 display: grid;
                 flex-direction: column;
                 grid-template-rows: auto;
-                opacity: 0;
-                pointer-events: none;
+                // opacity: 0;
+                // pointer-events: none;
                 border-radius: .2rem;
                 z-index: 100;
 
